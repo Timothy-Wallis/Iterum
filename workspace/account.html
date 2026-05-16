@@ -26,6 +26,7 @@
             <div></div>
             <div></div>
         </div>
+        <!--
         <script>
             window.addEventListener('load', function () {
                 let run = false;
@@ -47,14 +48,12 @@
             });
         </script>
     </div>
-    <!-- Animated gradient background layer -->
     <div id="bg-gradient" aria-hidden="true">
         <span></span>
         <span></span>
         <span></span>
         <span></span>
     </div>
-    <!-- Sticky Header -->
      <div id="loaded">
     <header class="site-header" id="siteHeader">
         <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="accountNav">
@@ -69,11 +68,7 @@
         </button>
         <div id="headerAuthArea" class="header-auth-area"></div>
     </header>
-
-    <!-- Mobile overlay -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-    <!-- Account Side Nav -->
     <nav class="sidebar" id="accountNav">
         <ul class="nav-links">
             <li><a href="#profile" class="active">Profile</a></li>
@@ -81,14 +76,10 @@
             <li><a href="#settings">Settings</a></li>
         </ul>
     </nav>
-
-    <!-- Main Content -->
     <main class="main-content" id="mainContent">
         <div class="account-body">
-            <!-- Auth state banner -->
             <div id="authBanner" class="auth-banner" role="status" aria-live="polite" hidden></div>
 
-            <!-- Login form (shown when logged out) -->
             <section id="loginSection" class="account-section" hidden>
                 <div class="account-card">
                     <h2>Sign In to Iterum Sciences</h2>
@@ -104,9 +95,9 @@
                 </div>
             </section>
 
-            <!-- Profile section (shown when logged in) -->
+
             <section id="profileSection" class="account-section" hidden>
-                <!-- Profile Overview -->
+
                 <div class="account-card" id="profile">
                     <h2>Profile Overview</h2>
                     <p id="userEmail" class="user-email-display"></p>
@@ -125,7 +116,6 @@
 
                 <hr class="account-divider">
 
-                <!-- Collaboration -->
                 <div class="account-card" id="collaboration">
                     <h2>Collaboration</h2>
                     <p class="account-card-intro">Connect with other researchers, share your work, and collaborate on projects.</p>
@@ -160,7 +150,6 @@
 
                 <hr class="account-divider">
 
-                <!-- Settings -->
                 <div class="account-card" id="settings">
                     <h2>Settings</h2>
                     <p class="account-card-intro">Customize your Iterum Sciences experience.</p>
@@ -200,7 +189,6 @@
         </footer>
     </main>
 
-    <!--
         SUPABASE CONFIGURATION
         ─────────────────────
         Replace the placeholder values below with your project's credentials.
@@ -211,155 +199,8 @@
 
         ⚠️  NEVER commit real secret keys to source control.
             These are public-safe anon keys only.
-    -->
-    <script type="module">
-        // ── Supabase config ──────────────────────────────────────────────
-        const SUPABASE_URL      = 'YOUR_SUPABASE_URL';       // ← replace
-        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';  // ← replace
-        // ─────────────────────────────────────────────────────────────────
-
-        const configMissing =
-            SUPABASE_URL === 'YOUR_SUPABASE_URL' ||
-            SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY';
-
-        // DOM references
-        const authBanner      = document.getElementById('authBanner');
-        const loginSection    = document.getElementById('loginSection');
-        const profileSection  = document.getElementById('profileSection');
-        const headerAuthArea  = document.getElementById('headerAuthArea');
-        const loginForm       = document.getElementById('loginForm');
-        const loginError      = document.getElementById('loginError');
-        const logoutBtn       = document.getElementById('logoutBtn');
-        const userEmailEl     = document.getElementById('userEmail');
-        const accountEmailEl  = document.getElementById('accountEmail');
-        const profileForm     = document.getElementById('profileForm');
-        const profileFeedback = document.getElementById('profileFeedback');
-
-        function showBanner(message, type = 'info') {
-            // Build banner with a close (✕) button
-            authBanner.innerHTML = '';
-            const text = document.createElement('span');
-            text.textContent = message;
-            const closeBtn = document.createElement('button');
-            closeBtn.className  = 'banner-close';
-            closeBtn.type       = 'button';
-            closeBtn.setAttribute('aria-label', 'Dismiss');
-            closeBtn.textContent = '✕';
-            closeBtn.addEventListener('click', () => { authBanner.hidden = true; });
-            authBanner.appendChild(text);
-            authBanner.appendChild(closeBtn);
-            authBanner.className = `auth-banner auth-banner-${type}`;
-            authBanner.hidden = false;
-        }
-
-        function hideBanner() {
-            authBanner.hidden = true;
-        }
-
-        function showLoginState() {
-            loginSection.hidden  = false;
-            profileSection.hidden = true;
-            // No Sign In button in the header — the form below is sufficient
-            headerAuthArea.innerHTML = '';
-        }
-
-        function showProfileState(user) {
-            loginSection.hidden  = true;
-            profileSection.hidden = false;
-            if (userEmailEl) userEmailEl.textContent = `Signed in as: ${user.email}`;
-            if (accountEmailEl) accountEmailEl.value = user.email || '';
-            headerAuthArea.innerHTML = `<span class="header-user-email">${user.email}</span>`;
-        }
-
-        if (configMissing) {
-            showBanner(
-                '⚙️  This is currently in development. To view updates, visit Github.', 'warning'
-            );
-            // Sign-in screen is temporarily disabled; login section stays hidden
-        } else {
-            // Dynamically import supabase-js from CDN
-            const { createClient } = await import(
-                'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-            );
-
-            const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-            // ── Check initial session ──────────────────────────────────
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
-                showProfileState(session.user);
-            } else {
-                showLoginState();
-            }
-
-            // ── Listen for auth changes ────────────────────────────────
-            supabase.auth.onAuthStateChange((_event, session) => {
-                if (session) {
-                    hideBanner();
-                    showProfileState(session.user);
-                } else {
-                    showLoginState();
-                }
-            });
-
-            // ── Login form ─────────────────────────────────────────────
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email    = document.getElementById('loginEmail').value.trim();
-                const password = document.getElementById('loginPassword').value;
-
-                loginError.hidden = true;
-                const submitBtn = loginForm.querySelector('input[type="submit"]');
-                submitBtn.disabled = true;
-                submitBtn.value = 'Signing in…';
-
-                const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-                submitBtn.disabled = false;
-                submitBtn.value = 'Sign In';
-
-                if (error) {
-                    loginError.textContent = error.message;
-                    loginError.hidden = false;
-                }
-            });
-
-            // ── Logout ─────────────────────────────────────────────────
-            logoutBtn.addEventListener('click', async () => {
-                logoutBtn.disabled = true;
-                logoutBtn.textContent = 'Signing out…';
-                await supabase.auth.signOut();
-                logoutBtn.disabled = false;
-                logoutBtn.textContent = 'Sign Out';
-            });
-
-            // ── Update profile ─────────────────────────────────────────
-            profileForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                profileFeedback.hidden = true;
-
-                const newEmail    = accountEmailEl.value.trim();
-                const newPassword = document.getElementById('accountPassword').value;
-                const currentUser = (await supabase.auth.getUser()).data.user;
-                const updates = {};
-                // Only include email if it has changed
-                if (newEmail && currentUser && newEmail !== currentUser.email) updates.email = newEmail;
-                if (newPassword) updates.password = newPassword;
-
-                if (Object.keys(updates).length === 0) return;
-
-                const { error } = await supabase.auth.updateUser(updates);
-                profileFeedback.hidden = false;
-                if (error) {
-                    profileFeedback.textContent = error.message;
-                    profileFeedback.className = 'form-feedback form-feedback-error';
-                } else {
-                    profileFeedback.textContent = 'Profile updated successfully.';
-                    profileFeedback.className = 'form-feedback form-feedback-success';
-                    document.getElementById('accountPassword').value = '';
-                }
-            });
-        }
+    <script type="module" src="./authScript.js">
+        
     </script>
 
     <script>
@@ -422,6 +263,16 @@
     </script>
 
     <script src="../app.js"></script>
+-->
+    <script type="module">
+        import { React } from 'https://esm.sh/react@18';
+        import { createRoot } from 'https://esm.sh/react-dom@18/client';
+        import App from '../bin/app.js';
+
+        const mountEl = document.getElementById('mainContent') || document.getElementById('loaded') || document.body;
+        const root = createRoot(mountEl);
+        root.render(React.createElement(App, null));
+    </script>
     </div>
 </body>
 
