@@ -134,8 +134,14 @@ function restoreCustomColorIfNeeded() {
     }
 }
 
-// ── Wire up controls after DOM is ready ──────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+function initThemeAndPaletteControls() {
+    if (window.__iterumThemeInitialized) {
+        return;
+    }
+    window.__iterumThemeInitialized = true;
+
+    applyPreferences();
+
     // Header dark-mode button
     const headerBtn = document.getElementById('themeBtn');
     if (headerBtn) headerBtn.addEventListener('click', toggleTheme);
@@ -163,7 +169,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sync initial state
     updateThemeControls();
     syncActiveSwatch();
-});
+}
+
+// ── Wire up controls after DOM is ready ──────────────────────────────────────
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeAndPaletteControls, { once: true });
+} else {
+    initThemeAndPaletteControls();
+}
 
 // ── Cross-tab / cross-page theme sync ────────────────────────────────────────
 window.addEventListener('storage', (e) => {

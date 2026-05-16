@@ -11,7 +11,7 @@ export default function Header(): JSX.Element {
                 createElement('span', { className: 'theme-icon-light', "aria-hidden": true }, '🌙'),
                 createElement('span', { className: 'theme-icon-dark', "aria-hidden": true }, '☀️')
             ),
-            createElement('a', { href: 'workspace/account.html', className: 'btn btn-login' }, 'Login')
+            createElement('a', { href: 'account.html', className: 'btn btn-login' }, 'Login')
         )
     )
 }

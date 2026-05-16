@@ -103,6 +103,9 @@ section {
     --hero-gradient:      linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #06b6d4 100%);
     --hero-subtitle-color: #38bdf8;
     --hero-subtitle-glow:  rgba(6, 182, 212, 0.35);
+
+    /* Page background gradient (light mode) */
+    --page-bg-gradient: linear-gradient(160deg, #ffffff 0%, #eef4ff 45%, #dbe7ff 100%);
 }
 
 /* =====================
@@ -142,6 +145,9 @@ section {
     --hero-gradient:       linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #67e8f9 100%);
     --hero-subtitle-color: #7dd3fc;
     --hero-subtitle-glow:  rgba(125, 211, 252, 0.35);
+
+    /* Page background gradient (dark mode) */
+    --page-bg-gradient: linear-gradient(160deg, #020b3d 0%, #0b1a5a 45%, #1f3b7a 100%);
 }
 
 /* =====================
@@ -220,7 +226,9 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background: transparent;
+    background-color: var(--bg-base);
+    background-image: var(--page-bg-gradient);
+    background-attachment: fixed;
     overflow-x: hidden;
 }
 
@@ -381,7 +389,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    transition: background var(--transition-speed), box-shadow var(--transition-speed);
+    transition:background var(--transition-speed), box-shadow var(--transition-speed);
     flex-shrink: 0;
 }
 
@@ -529,11 +537,6 @@ body {
         max-width: 300px;
     }
 
-    .btn-login {
-        padding: 0.3rem 0.7rem !important;
-        font-size: 0.78rem;
-    }
-
     .header-user-email { max-width: 120px; }
 }
 
@@ -562,11 +565,13 @@ body {
    Hero
    ===================== */
 .hero {
-    background-image: url('./assets/background-image.png');
+    background-image:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.22)),
+        url('/background-image.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     background-blend-mode: multiply;
-    background-color: rgba(150, 150, 150, .9);
     color: var(--text-inverse);
     padding: 6rem 2rem;
     min-height: 100vh;

@@ -14,7 +14,7 @@ export default function About(): JSX.Element {
                         'featureIcon': '🔬',
                         'featureTitle': 'New Research Tools',
                         'featureDescription': 'Tools designed for cutting-edge biological research and analysis'
-                    })),
+                    }),
                 featureCard({
                     'featureIcon': '⚡',
                     'featureTitle': 'High Performance',
@@ -24,7 +24,7 @@ export default function About(): JSX.Element {
                     'featureIcon': '🤝',
                     'featureTitle': 'Collaborative',
                     'featureDescription': 'Built in collaboration features for seamless teamwork'
-                })
+                }))
             )
         )
     )
