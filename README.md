@@ -3,7 +3,7 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-https://iterum--sciences.vercel.app-brightgreen)](https://iterum-sciences.vercel.app)
 [![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 
-Iterum Sciences is the official web platform for Iterum Sciences, focused on delivering practical tools and resources for biology and life sciences education.
+This is the official web platform for Iterum Sciences, focused on delivering practical tools and resources for biology and life sciences education.
 
 ## Overview
 
@@ -16,7 +16,7 @@ The UI is component-driven, with shared styling and client-side theming controls
 - **Entry point:** `index.html` + `src/main.tsx`
 - **Root app composition:** `src/App.tsx`
 - **UI sections/components:** `src/assets/*.tsx`
-- **Client behavior scripts:** `src/assets/app.js` and `src/assets/script.js` (loaded from `App.tsx`)
+- **Client behavior scripts:** `src/assets/app.js` and `src/assets/script.js` (loaded from `App.tsx` as retained JavaScript modules for shared DOM behavior)
 - **Global styling:** root-level `styles.css` (imported by `src/main.tsx`)
 
 ### Build and Tooling
@@ -29,7 +29,7 @@ The UI is component-driven, with shared styling and client-side theming controls
 - `public/` contains static assets served directly by Vite (for example `favicon.jpg`, `background-image.png`, and SVG assets).
 
 ### Additional Static Page
-- `account.html` currently provides an availability placeholder for account functionality.
+- `account.html` currently serves as a placeholder page for account functionality.
 
 ## Repository Structure
 
