@@ -2,85 +2,103 @@
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-https://iterum--sciences.vercel.app-brightgreen)](https://iterum-sciences.vercel.app)
 [![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
-![Version](https://img.shields.io/badge/version-0.0.3-informational)
 
-**Iterum Sciences** is the official web platform for Iterum Sciences — a company dedicated to delivering useful tools and resources for the biology and life sciences community. The platform serves educators and students with a suite of solutions designed to streamline workflows and support learning in the biological sciences.
-
----
+Iterum Sciences is the official web platform for Iterum Sciences, focused on delivering practical tools and resources for biology and life sciences education.
 
 ## Overview
 
-Iterum Sciences provides a centralized interface for accessing biology-focused teaching materials, genomics software, and collaborative workspace features. The site is built as a lightweight, fully client-side web application with no external runtime dependencies.
+The project is now implemented as a **React + TypeScript single-page application** built with **Vite**.  
+The UI is component-driven, with shared styling and client-side theming controls (theme and palette persistence via `localStorage`).
 
----
+## Current Architecture
 
-## Features
+### Frontend Application
+- **Entry point:** `index.html` + `src/main.tsx`
+- **Root app composition:** `src/App.tsx`
+- **UI sections/components:** `src/assets/*.tsx`
+- **Client behavior scripts:** `src/assets/app.js` and `src/assets/script.js` (loaded from `App.tsx`)
+- **Global styling:** `styles.css` (imported in `src/main.tsx`)
 
-- **Biology Tool Suite** — Direct access to tools including teaching materials and genomics software.
-- **User Accounts** — Login and account management for personalized access.
-- **Team Collaboration** — A dedicated collaboration dashboard for working with teams.
-- **Theme Support** — Light and dark mode with multiple color palette options, persisted across sessions via `localStorage`.
-- **Responsive Design** — Mobile-friendly layout with a collapsible sidebar navigation.
-- **No-Flash Theming** — Saved theme preferences are applied before the first paint to prevent a flash of unstyled content.
+### Build and Tooling
+- **Bundler/dev server:** Vite
+- **Language:** TypeScript + React
+- **Linting:** ESLint
+- **Package management:** npm
 
----
+### Static/Public Assets
+- `public/` contains static assets served directly by Vite (for example `favicon.jpg`, `background-image.png`, and SVG assets).
 
-## Project Structure
+### Additional Static Page
+- `account.html` currently provides an availability placeholder for account functionality.
 
+## Repository Structure
+
+```text
+Iterum-Sciences/
+├── index.html
+├── account.html
+├── styles.css
+├── public/
+│   ├── favicon.jpg
+│   ├── background-image.png
+│   └── icons.svg
+├── src/
+│   ├── main.tsx
+│   ├── App.tsx
+│   ├── App.css
+│   ├── index.css
+│   └── assets/
+│       ├── FullHeader.tsx
+│       ├── Hero.tsx
+│       ├── About.tsx
+│       ├── ToolSelection.tsx
+│       ├── Research.tsx
+│       ├── Footer.tsx
+│       ├── app.js
+│       └── script.js
+├── package.json
+├── tsconfig*.json
+└── vite.config.ts
 ```
-Iterum Sciences/
-├── index.html              # Main landing page
-├── styles.css              # Global stylesheet
-├── app.js                  # Shared application logic (theming, sidebar)
-├── script.js               # Page-specific scripts
-├── assets/                 # Static assets (images, icons, etc.)
-└── workspace/
-    ├── account.html        # User account page
-    └── collaboration.html  # Team collaboration dashboard
-```
 
----
+## Local Development
 
-## Technology Stack
-
-| Layer      | Technology                        |
-|------------|-----------------------------------|
-| Markup     | HTML5                             |
-| Styling    | CSS3 (custom properties, flexbox) |
-| Scripting  | Vanilla JavaScript (ES6+)         |
-| Hosting    | Vercel (linked tools)             |
-
----
-
-## Getting Started
-
-No build step is required. To run the project locally:
-
-1. Clone the repository:
+1. Install dependencies:
    ```bash
-   git clone https://github.com/Timothy-Wallis/Iterum-Sciences.git
+   npm install
    ```
-2. Open `index.html` in your browser, or serve the directory with any static file server:
+2. Start the development server:
    ```bash
-   npx serve .
+   npm run dev
+   ```
+3. Build for production:
+   ```bash
+   npm run build
+   ```
+4. Preview the production build locally:
+   ```bash
+   npm run preview
    ```
 
----
+## Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Run the Vite development server |
+| `npm run build` | Type-check and build production assets |
+| `npm run lint` | Run ESLint across the repository |
+| `npm run preview` | Preview the built app locally |
 
 ## Tools
 
-| Tool                 | Description                                               | Link                                      |
-|----------------------|-----------------------------------------------------------|-------------------------------------------|
-| Teaching Materials   | Interactive resources for teaching biological systems     | [ecosystemsim.vercel.app](https://ecosystemsim.vercel.app/) |
-| Genomics Software    | Tools for exploring genomic data and concepts             | ![Under Development](https://img.shields.io/badge/Status-Unavailable-yellow) |
-
----
+| Tool | Description | Link |
+|------|-------------|------|
+| Teaching Materials | Interactive resources for teaching biological systems | [ecosystemsim.vercel.app](https://ecosystemsim.vercel.app/) |
+| Genomics Software | Tools for exploring genomic data and concepts | ![Under Development](https://img.shields.io/badge/Status-Unavailable-yellow) |
 
 ## Contact
 
 For questions or support, please reach out at **timothywallis@ucmerced.edu**.
-
----
 
 ## License
 
