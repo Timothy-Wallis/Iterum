@@ -7,10 +7,12 @@ import AboutSection from './assets/About.tsx';
 import { useEffect } from 'react';
 
 function App() {
-  useEffect(() => {
-    import('./assets/app.js');
-    import('./assets/script.js');
-  }, []);
+useEffect(() => {
+  // @ts-ignore
+  import('./assets/app.js');
+  // @ts-ignore
+  import('./assets/script.js');
+}, []);
 
   return (
     <>
