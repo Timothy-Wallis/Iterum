@@ -1,73 +1,87 @@
-# React + TypeScript + Vite
+# Iterum Sciences
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-https://iterum--sciences.vercel.app-brightgreen)](https://iterum-sciences.vercel.app)
+[![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
+![Version](https://img.shields.io/badge/version-0.0.3-informational)
 
-Currently, two official plugins are available:
+**Iterum Sciences** is the official web platform for Iterum Sciences — a company dedicated to delivering useful tools and resources for the biology and life sciences community. The platform serves educators and students with a suite of solutions designed to streamline workflows and support learning in the biological sciences.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Iterum Sciences provides a centralized interface for accessing biology-focused teaching materials, genomics software, and collaborative workspace features. The site is built as a lightweight, fully client-side web application with no external runtime dependencies.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Biology Tool Suite** — Direct access to tools including teaching materials and genomics software.
+- **User Accounts** — Login and account management for personalized access.
+- **Team Collaboration** — A dedicated collaboration dashboard for working with teams.
+- **Theme Support** — Light and dark mode with multiple color palette options, persisted across sessions via `localStorage`.
+- **Responsive Design** — Mobile-friendly layout with a collapsible sidebar navigation.
+- **No-Flash Theming** — Saved theme preferences are applied before the first paint to prevent a flash of unstyled content.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
+
+```
+Iterum Sciences/
+├── index.html              # Main landing page
+├── styles.css              # Global stylesheet
+├── app.js                  # Shared application logic (theming, sidebar)
+├── script.js               # Page-specific scripts
+├── assets/                 # Static assets (images, icons, etc.)
+└── workspace/
+    ├── account.html        # User account page
+    └── collaboration.html  # Team collaboration dashboard
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Technology Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Layer      | Technology                        |
+|------------|-----------------------------------|
+| Markup     | HTML5                             |
+| Styling    | CSS3 (custom properties, flexbox) |
+| Scripting  | Vanilla JavaScript (ES6+)         |
+| Hosting    | Vercel (linked tools)             |
+
+---
+
+## Getting Started
+
+No build step is required. To run the project locally:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Timothy-Wallis/Iterum-Sciences.git
+   ```
+2. Open `index.html` in your browser, or serve the directory with any static file server:
+   ```bash
+   npx serve .
+   ```
+
+---
+
+## Tools
+
+| Tool                 | Description                                               | Link                                      |
+|----------------------|-----------------------------------------------------------|-------------------------------------------|
+| Teaching Materials   | Interactive resources for teaching biological systems     | [ecosystemsim.vercel.app](https://ecosystemsim.vercel.app/) |
+| Genomics Software    | Tools for exploring genomic data and concepts             | ![Under Development](https://img.shields.io/badge/Status-Unavailable-yellow) |
+
+---
+
+## Contact
+
+For questions or support, please reach out at **timothywallis@ucmerced.edu**.
+
+---
+
+## License
+
+© 2026 Iterum Sciences. All rights reserved. See [LICENSE](LICENSE) for details.
