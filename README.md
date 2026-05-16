@@ -17,7 +17,7 @@ The UI is component-driven, with shared styling and client-side theming controls
 - **Root app composition:** `src/App.tsx`
 - **UI sections/components:** `src/assets/*.tsx`
 - **Client behavior scripts:** `src/assets/app.js` and `src/assets/script.js` (loaded from `App.tsx`)
-- **Global styling:** `styles.css` (imported in `src/main.tsx`)
+- **Global styling:** root-level `styles.css` (imported in `src/main.tsx` via `../styles.css`)
 
 ### Build and Tooling
 - **Bundler/dev server:** Vite
