@@ -2,12 +2,17 @@ import { type JSX } from "react";
 import HeaderComponent from "./Header.tsx";
 import MobileOverlay from "./MobileOverlay.tsx";
 import SidebarNav from "./SideBarNav.tsx";
-export default function FullHeader(): JSX.Element {
+interface HomeProps {
+    onNavigate: (page:  'home' | 'analytics' | 'settings') => void;
+    sidebarOpen: boolean;
+    onToggleSidebar: () => void;
+}
+export default function FullHeader({onNavigate, sidebarOpen, onToggleSidebar}: HomeProps): JSX.Element {
     return (
         <>
-            <HeaderComponent />
-            <MobileOverlay />
-            <SidebarNav />
+            <HeaderComponent onNavigate={onNavigate} onToggleSidebar={onToggleSidebar}/>
+            <MobileOverlay open={sidebarOpen} onClose={() => onToggleSidebar()}/>
+            <SidebarNav open={sidebarOpen} onLinkClick={() => onToggleSidebar()} />
         </>
     )
 }

@@ -1,9 +1,13 @@
 import { createElement, type JSX } from "react";
 import SpanComponent from "./SpanComp.tsx";
-export default function Header(): JSX.Element {
+interface HomeProps {
+    onNavigate: (page:  'home' | 'analytics' | 'settings') => void;
+    onToggleSidebar: () => void;
+}
+export default function Header({onNavigate, onToggleSidebar}: HomeProps): JSX.Element {
     return (
         createElement('header', { className: 'site-header', id: 'siteHeader' },
-            createElement('button', { className: 'menu-btn', id: 'menuBtn', "aria-label": "Toggle navigation menu", "aria-expanded": false, "aria-controls": "sidebar" },
+            createElement('button', { className: 'menu-btn', id: 'menuBtn', "aria-label": "Toggle navigation menu", "aria-expanded": false, "aria-controls": "sidebar", onClick: onToggleSidebar },
                 SpanComponent()
             ),
             createElement('a', { href: '#home', className: 'brand-name' }, 'Iterum Sciences'),
@@ -11,7 +15,9 @@ export default function Header(): JSX.Element {
                 createElement('span', { className: 'theme-icon-light', "aria-hidden": true }, '🌙'),
                 createElement('span', { className: 'theme-icon-dark', "aria-hidden": true }, '☀️')
             ),
-            createElement('a', { href: 'account.html', className: 'btn btn-login' }, 'Login')
+            createElement('button', { className: 'btn btn-login', onClick: () => {
+                onNavigate("settings");
+            } }, 'Login')
         )
     )
 }

@@ -1,38 +1,61 @@
-import FullHeader from './assets/FullHeader.tsx';
-import Hero from './assets/Hero.tsx';
-import ToolSection from './assets/ToolSelection.tsx';
-import ResearchSection from './assets/Research.tsx';
-import Footer from './assets/Footer.tsx';
-import AboutSection from './assets/About.tsx';
-import { useEffect } from 'react';
+
+import { useEffect, useState, lazy, Suspense } from 'react';
+
+const Home = lazy(() => import('./Home.tsx'));
+const Settings = lazy(() => import('./Settings.tsx'));
 
 function App() {
-useEffect(() => {
-  // @ts-ignore
-  import('./assets/app.js');
-  // @ts-ignore
-  import('./assets/script.js');
-}, []);
+  const [currentPage, setCurrentPage] = useState<'home' | 'analytics' | 'settings' | 'collaboration' | 'signup' | 'login'>('home');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  return (
-    <>
-    {/*Render for later use
-      <div id="bg-gradient" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div> */}
-      <FullHeader />
-      <main className="main-content" id="mainContent">
-        <Hero />
-        <AboutSection />
-        <ToolSection />
-        <ResearchSection />
-        <Footer />
-      </main>
-    </>
-  )
+  useEffect(() => {
+    // @ts-ignore
+    import('./assets/app.js');
+    // @ts-ignore
+    import('./assets/script.js');
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      // Mobile: manage mobile-open class on sidebar via sidebarOpen state
+      // This is handled in SideBarNav component
+    } else {
+      // Desktop: manage sidebar-collapsed class on body
+      if (sidebarOpen) {
+        document.body.classList.remove('sidebar-collapsed');
+      } else {
+        document.body.classList.add('sidebar-collapsed');
+      }
+    }
+  }, [sidebarOpen, isMobile]);
+
+  const handleNavigation = (nextPage: 'home' | 'analytics' | 'settings' | 'collaboration' | 'signup' | 'login') => {
+    setCurrentPage(nextPage);
+  };
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+  return <Suspense fallback={
+    <div id="loadIcon">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>}>
+    {currentPage == "home" && <Home onNavigate={handleNavigation} sidebarOpen={sidebarOpen} onToggleSidebar={toggleSidebar} />}
+    {currentPage == "settings" && <Settings />}
+  </Suspense>
+
 }
 
 export default App
