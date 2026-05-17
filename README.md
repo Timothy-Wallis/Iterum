@@ -1,6 +1,6 @@
 # Iterum Sciences
 
-[![Live Demo](https://img.shields.io/badge/Live--Demo-iterum--sciences.vercel.app-green)](https://iterum-sciences.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live--Demo-iterum--sciences.vercel.app-neongreen)](https://iterum-sciences.vercel.app)
 [![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 
 This is the official web platform for Iterum Sciences, focused on delivering practical tools and resources for biology and life sciences education.
