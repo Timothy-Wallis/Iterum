@@ -13,7 +13,7 @@ export default function Header({onNavigate, onToggleSidebar}: HomeProps): JSX.El
             createElement('a', { onClick: () => {
                 onNavigate("home");
             }, className: 'brand-name', style: {"cursor": "pointer"}}, 'Iterum Sciences'),
-            createElement('button', { className: 'theme-btn', id: 'themeBtn', "aria-label": "Switch to dark mode", style: {"cursor": "pointer"} },
+            createElement('button', { className: 'theme-btn', id: 'themeBtn', "aria-label": "Switch to dark mode", style: {"cursor": "pointer"}, onClick: () => window.toggleTheme() },
                 createElement('span', { className: 'theme-icon-light', "aria-hidden": true }, '🌙'),
                 createElement('span', { className: 'theme-icon-dark', "aria-hidden": true }, '☀️')
             ),

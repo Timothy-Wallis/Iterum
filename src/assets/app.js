@@ -171,6 +171,9 @@ function initThemeAndPaletteControls() {
     syncActiveSwatch();
 }
 
+// Expose toggleTheme globally for React components
+window.toggleTheme = toggleTheme;
+
 // ── Wire up controls after DOM is ready ──────────────────────────────────────
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initThemeAndPaletteControls, { once: true });

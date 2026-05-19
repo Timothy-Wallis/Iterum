@@ -11,6 +11,11 @@
 
 html {
     scroll-behavior: smooth;
+    cursor: default;
+}
+
+html::selection{
+    background-color: transparent;
 }
 
 section {
