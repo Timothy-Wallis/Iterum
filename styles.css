@@ -369,12 +369,12 @@ body {
     font-weight: 700;
     color: var(--text-inverse);
     text-decoration: none;
-    flex: 1;
     white-space: nowrap;
     letter-spacing: 0.02em;
+    transition: opacity 0.25s;
 }
 
-.brand-name:hover { opacity: 0.9; }
+.brand-name:hover { opacity: 0.5; }
 
 /* Login button */
 .btn-login {
@@ -1065,6 +1065,7 @@ body {
    Theme Toggle
    ===================== */
 .theme-btn {
+    display: flex;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -1073,9 +1074,9 @@ body {
     font-size: 1.1rem;
     flex-shrink: 0;
     line-height: 1;
-    display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: auto;
     transition: background var(--transition-speed);
 }
 

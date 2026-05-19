@@ -53,7 +53,7 @@ function App() {
       <div></div>
     </div>}>
     {currentPage == "home" && <Home onNavigate={handleNavigation} sidebarOpen={sidebarOpen} onToggleSidebar={toggleSidebar} />}
-    {currentPage == "settings" && <Settings />}
+    {currentPage == "settings" && <Settings onNavigate={handleNavigation} sidebarOpen={sidebarOpen} onToggleSidebar={toggleSidebar}/>}
   </Suspense>
 
 }

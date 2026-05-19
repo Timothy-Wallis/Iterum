@@ -10,14 +10,16 @@ export default function Header({onNavigate, onToggleSidebar}: HomeProps): JSX.El
             createElement('button', { className: 'menu-btn', id: 'menuBtn', "aria-label": "Toggle navigation menu", "aria-expanded": false, "aria-controls": "sidebar", onClick: onToggleSidebar },
                 SpanComponent()
             ),
-            createElement('a', { href: '#home', className: 'brand-name' }, 'Iterum Sciences'),
-            createElement('button', { className: 'theme-btn', id: 'themeBtn', "aria-label": "Switch to dark mode" },
+            createElement('a', { onClick: () => {
+                onNavigate("home");
+            }, className: 'brand-name', style: {"cursor": "pointer"}}, 'Iterum Sciences'),
+            createElement('button', { className: 'theme-btn', id: 'themeBtn', "aria-label": "Switch to dark mode", style: {"cursor": "pointer"} },
                 createElement('span', { className: 'theme-icon-light', "aria-hidden": true }, '🌙'),
                 createElement('span', { className: 'theme-icon-dark', "aria-hidden": true }, '☀️')
             ),
             createElement('button', { className: 'btn btn-login', onClick: () => {
                 onNavigate("settings");
-            } }, 'Login')
+            }, style: {"cursor": "pointer"}}, 'Login')
         )
     )
 }
